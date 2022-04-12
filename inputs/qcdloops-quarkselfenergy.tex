@@ -1,0 +1,46 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdloops-quarkselfenergy} 
+%
+\begin{tikzpicture}
+	
+	\begin{feynman}
+
+	% ------------------------------------------------
+	% Ensure the dimensions of graphic are appropriate
+	%\useasboundingbox (0, 0.7*\loopsh) rectangle (\loopsw, -0.3*\loopsh);
+		
+	% ------------------------------------------------
+	% Relevant coordinates
+	\coordinate (Beg) at (0.20cm,0);
+
+	\path (Beg) +(2.50cm,0) coordinate (V1);
+	\path (V1)  +(2.50cm,0) coordinate (V2);
+	\path (V2)  +(2.50cm,0) coordinate (End);
+
+	\path (V1)			+(0.00cm,1.20cm) coordinate (LabelStart);
+	\path (LabelStart)	+(2.50cm,0.00cm) coordinate (LabelEnd);
+
+	% ----------------
+	% Dotted vertices
+	\node[dot] (V1Dot) at (V1) +(0.00cm, 0.00cm);
+	\node[dot] (V2Dot) at (V2) +(0.00cm, 0.00cm);
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %Diagram
+	\diagram*{
+	
+	(Beg)	-- [thick, fermion, momentum' = \(\boldsymbol{p}\)] (V1) 
+			-- [thick, fermion, momentum' = \(\boldsymbol{k}\)] (V2)
+			-- [thick, fermion, momentum' = \(\boldsymbol{p}\)] (End),
+	
+	(LabelStart) -- [opacity=0, momentum = \(\boldsymbol{p-k}\)] (LabelEnd)
+	
+	};
+
+	\draw[thick, gluon] (V1) arc [start angle=180, end angle=0, radius=1.25cm];
+		
+	%\draw[blue, thick, gluon] (V1) arc [start angle=180, end angle=-180, radius=1.25cm];	
+	
+	\end{feynman}
+	
+\end{tikzpicture}

@@ -1,0 +1,53 @@
+% ------------------------------------------------
+% Coordinates: Medium collisions
+
+% Upper branch collision
+\path (PairCreation) +(+30:2.50cm) coordinate (CollEnd1);
+%
+\path (CollEnd1) +(90:0.90cm) coordinate (CollInit1);
+%
+\path (CollInit1) +(160:0.75cm) coordinate (CollIncoming1);	
+\path (CollInit1) +(030:0.75cm) coordinate (CollOutgoing1);	
+
+% Middle branch collision
+\path (Gluon1) +(-20:1.50cm) coordinate (CollEnd2Aux);
+\path (CollEnd2Aux) +(0cm,-0.08cm) coordinate (CollEnd2); % Because gluons curl
+%
+\path (CollEnd2) +(-90:0.90cm) coordinate (CollInit2);
+%
+\path (CollInit2) +(200:0.75cm) coordinate (CollIncoming2);	
+\path (CollInit2) +(-30:0.75cm) coordinate (CollOutgoing2);		
+
+% Lower branch collision
+\path (PairCreation) +(-30:0.70cm) coordinate (CollEnd3);
+%
+\path (CollEnd3) +(-90:0.90cm) coordinate (CollInit3);
+%
+\path (CollInit3) +(200:0.75cm) coordinate (CollIncoming3);	
+\path (CollInit3) +(-30:0.75cm) coordinate (CollOutgoing3);		
+
+% ------------------------------------------------
+% Diagram: Medium collisions
+
+\diagram*{
+	
+	% Upper branch collision
+	(CollEnd1) -- [gluon] (CollInit1),
+	
+	(CollIncoming1)	-- [fermion] (CollInit1) 
+					-- [fermion] (CollOutgoing1),
+	
+	% Middle branch collision
+	(CollEnd2) -- [gluon] (CollInit2),
+	
+	(CollIncoming2)	-- [fermion] (CollInit2) 
+					-- [fermion] (CollOutgoing2),
+	
+	
+	% Lower branch collision
+	(CollEnd3) -- [gluon] (CollInit3),
+	
+	(CollIncoming3)	-- [fermion] (CollInit3) 
+					-- [fermion] (CollOutgoing3),
+
+};

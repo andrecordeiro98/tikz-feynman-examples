@@ -1,0 +1,38 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdrules-vertexghostgluon}
+%
+\begin{tikzpicture}
+
+	
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates:
+	
+	\node (V1) at (180:2.50cm) {\(\mu, a\)};
+	\node (V2) at (+60:2.50cm) {\(b\)};
+	\node (V3) at (-60:2.50cm) {\(c\)};	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+    \begin{feynman}
+
+    %Diagram
+    \diagram*{
+
+    (V1) -- [thick, gluon, momentum' =\({ \boldsymbol{k_{}^{}} }\)
+			] (C),
+
+    (C) -- [very thick, ghost, momentum =\({ \boldsymbol{p_{1}^{}} }\)
+           ] (V2),
+
+	%momentum' == arrow on the outside
+    (V3) -- [very thick, ghost, momentum' =\({ \boldsymbol{p_{2}^{}} }\)
+           	] (C),
+
+    };
+    
+    \end{feynman}
+
+\end{tikzpicture}

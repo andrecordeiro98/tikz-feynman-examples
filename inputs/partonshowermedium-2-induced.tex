@@ -1,0 +1,31 @@
+% ------------------------------------------------
+% Coordinates: Medium-induced emissions
+
+% Induced upper branch	
+\path (PairCreation) +(+30:4.50cm) coordinate (InducedEmission1);
+%
+\path (InducedEmission1) +(-10:2.50cm) coordinate (InducedGluon1);
+%
+\path (InducedGluon1) +(+15:1.00cm) coordinate (InducedFermion1a);	
+\path (InducedGluon1) +(-10:1.00cm) coordinate (InducedFermion1b);	
+
+% Induced lower branch	
+\path (PairCreation) +(-30:2.00cm) coordinate (InducedEmission2);
+%
+\path (InducedEmission2) +(-65:3.50cm) coordinate (InducedGluon2);
+
+
+% ------------------------------------------------
+% Diagram: Medium-induced emissions
+\diagram*{
+			
+	% Induced upper branch	
+	(InducedEmission1) -- [gluon] (InducedGluon1),
+	
+	(InducedFermion1a)	-- [fermion] (InducedGluon1) 
+	-- [fermion] (InducedFermion1b),
+	
+	% Induced lower branch	
+	(InducedGluon2) -- [gluon] (InducedEmission2),	
+
+};

@@ -1,0 +1,294 @@
+\documentclass[12pt]{article}
+
+% -----------------------
+% GEOMETRY --- ARTICLE 
+\usepackage{geometry,setspace,hyperref}
+
+\geometry{
+	a4paper, % Paper size
+	left	= 2.50 cm,
+	right	= 2.50 cm,
+	top		= 2.00 cm,
+	bottom	= 2.00 cm,
+	marginratio=1:1,
+	%
+	layoutvoffset	= 0.00 cm, 
+	layouthoffset	= 0.00 cm, 
+	%
+	marginparwidth	= 2.00 cm, % So the 'todonotes' package doesn't flip out.
+}
+
+\pagestyle{empty} % Suppress page numbers 
+
+
+\setstretch{1.30} % This is a good line spacing
+
+
+% -----------------------
+
+
+% -----------------------
+% CONFIG PACKAGES
+\input{config-packages}
+
+% -----------------------
+% CONFIG FONTS
+\input{config-fonts}
+
+
+% -----------------------
+% EXTERNALISING FIGURES
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=./outputs/] % activate and define figures/ as cache folder
+% Forced remake (only remakes things when code is changed). 
+% If you change the config file, uncomment this once
+%\tikzset{external/force remake}	
+
+% -----------------------
+% TIKZ-FEYNMAN
+
+%Feynman Diagrams -- LuaLaTeX compiler needed
+\usepackage[compat=1.1.0]{tikz-feynman}
+\tikzfeynmanset{/tikzfeynman/warn luatex=false} % Except not really, you can turn off the warning
+
+% Configuration file -- sets the default colours for TIKZ-FEYNMAN elements
+\input{config-feynman.tex}
+
+% -----------------------
+% SOME COMMANDS
+
+\newcommand{\mycomment}[1]{}
+
+\newcommand{\sub}[1]{_{#1}^{}} %Subscripts with proper height
+\newcommand{\upp}[1]{_{}^{#1}} %Superscripts with proper height
+\newcommand{\ind}[2]{^{#1}_{#2}} %Both
+
+
+%--------------------------
+\begin{document}
+
+\title{Tikz-Feynman Examples}
+\author{André Cordeiro}
+\date{April 2022}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Outputs}
+
+% ----------------------------------
+\subsection{Document with Examples}
+
+This document, compiled from \texttt{main-general.tex}, contains multiple examples of Feynman diagrams (particularly relevant for QCD). Each example is defined in a different \texttt{.tex} file in the \texttt{/inputs} directory, and included below.
+
+For convenience, the \texttt{external} tikz library is used to export the outputs as individual \texttt{.pdf} files into the \texttt{/outputs} directory. An advantage of this library is that the \texttt{.tex} files are only compiled when changed, speeding up the compilation. To override this, uncomment the following line.
+\begin{verbatim}
+	\tikzset{external/force remake}	
+\end{verbatim}
+
+You should do this once after changing any of the configuration files, to ensure the changes take effect. Due to the externalisation, this file is useful to change the style of multiple figures at once.
+
+Because the externalisation creates many files besides the \texttt{.pdf}, the \texttt{/outputs} directory contains a short script --- \texttt{clear.sh} --- to eliminate them.
+
+
+
+% ----------------------------------
+\subsection{Standalone}
+
+The \texttt{main-standalone.tex} can be used to generate a single \texttt{.pdf} from one of the examples. This is useful to create images that change step by step.
+
+The \texttt{.pdf} border can be adjusted by changing the first lines of \texttt{main-standalone.tex}.
+\begin{verbatim}
+	\documentclass[
+	border={-10pt 0pt -6pt 0pt} % left bottom right top
+	]{standalone} 
+\end{verbatim}
+
+Adjust in a case by case basis.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Configuration Files}
+
+
+% ----------------------------------
+\subsection{Packages}
+
+Simply includes the necessary \texttt{tikz} libraries necessary to draw the following examples.
+
+% ----------------------------------
+\subsection{Fonts}
+
+In \texttt{config-fonts.tex} the font for the document can be changed. Here, two options are suggested, including \texttt{kpfonts} (a seriffed font which is slightly more distinctive than the \LaTeX\, default `Computer Modern') and \texttt{cmbright} (a sans-serif font fully compatible math mode). Make sure to only uncomment one of these lines.
+
+The \textbackslash\texttt{mathscr} commands were also defined, as an alternative to \textbackslash\texttt{mathcal}.
+
+% ----------------------------------
+\subsection{Tikz-Feynman}
+
+In \texttt{config-feynman.tex}, the default styles were customised in different ways:
+
+\begin{itemize}
+	\item the momentum arrows are now shorter and coloured red,
+	\item the \texttt{ghost} style uses both round dots and arrows (to distinguish `ghosts' from `antighosts'),
+	\item the \texttt{blob} style is larger and coloured blue.
+\end{itemize}
+
+Other changes are possible, for example setting all photons to have a well defined colour, by adding the lines
+
+\begin{verbatim}
+\tikzfeynmanset{
+	photon/.append style	= {yellow},
+}
+\end{verbatim}
+
+to the end of the file. The different particle styles available in \texttt{tikz-feynman} are stated in its \href{https://ctan.org/pkg/tikz-feynman}{documentation}.
+
+\newpage 
+
+\section{Examples}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE QCD FEYNMAN RULES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{QCD Feynman Rules}
+
+\begin{center}
+	
+\input{inputs/qcdrules-vertex3gluon}
+
+\input{inputs/qcdrules-vertex4gluon}
+
+\input{inputs/qcdrules-vertexquarkgluon}
+
+\input{inputs/qcdrules-vertexghostgluon}
+
+\input{inputs/qcdrules-propagatorquark}
+
+\input{inputs/qcdrules-propagatorgluon}
+
+\input{inputs/qcdrules-propagatorghost}
+
+\end{center}
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LOOPS IN QCD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{QCD Loops}
+
+% NOT EXHAUSTIVE, JUST THE ONES NEEDED TO RENORMALISE THE THEORY
+
+\begin{center}
+	
+\input{inputs/qcdloops-quarkselfenergy}
+
+\input{inputs/qcdloops-ghostselfenergy}
+
+\input{inputs/qcdloops-gluonloop}
+
+\input{inputs/qcdloops-quarkloop}
+
+\input{inputs/qcdloops-ghostloop}
+
+\input{inputs/qcdloops-gluontadpole}
+
+\input{inputs/qcdloops-vertexghostgluon-ghostexchange}
+
+\input{inputs/qcdloops-vertexghostgluon-gluonexchange}
+
+\end{center}
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE DOUBLE GLUON EMISSION DIAGRAMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Double Gluon Emission Diagrams}
+
+% NOTE: THESE ARE USED TO DETERMINE BOUNDING BOXES
+% 		MUST BE DEFINED HERE
+
+\begin{center}
+	
+\newlength{\imagew}\setlength{\imagew}{10.50cm}
+\newlength{\imageh}\setlength{\imageh}{4.00cm}
+
+\input{inputs/thesis-doublesplitting-M1}
+
+\input{inputs/thesis-doublesplitting-M2}
+
+\input{inputs/thesis-doublesplitting-M3}
+
+\input{inputs/thesis-doublesplitting-M4}
+
+\end{center}
+
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PARTON SHOWER IN MEDIUM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Quark-Antiquark Antenna}
+
+\begin{center}
+	
+\input{inputs/qcd-antenna-lower}
+
+\input{inputs/qcd-antenna-upper}
+
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PARTON SPLITTINGS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Factorisation of Parton Splittings}
+
+\begin{center}
+
+\input{inputs/factorisation-in}
+
+\input{inputs/factorisation-out}
+	
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PARTON SHOWER IN MEDIUM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Medium Parton Shower}
+
+\begin{center}
+	
+\input{inputs/partonshowermedium-steps}
+
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A CONTOUR INTEGRAL --- FOR FUN!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Contour Integral}
+
+\begin{center}
+
+\input{inputs/contour-integral}
+
+\end{center}
+
+
+\end{document}
+

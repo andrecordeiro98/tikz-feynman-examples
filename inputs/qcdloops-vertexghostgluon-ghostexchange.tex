@@ -1,0 +1,48 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdloops-vertexghostgluon-ghostexchange} 
+%
+\begin{tikzpicture}
+	
+	\begin{feynman}
+	
+	% ------------------------------------------------
+	% Ensure the dimensions of graphic are appropriate
+	%\useasboundingbox (0, 0.7*\loopsh) rectangle (\loopsw, -0.7*\loopsh);
+	
+	% ------------------------------------------------
+	% Relevant coordinates
+	\coordinate (Beg) at (0,0);
+	
+	\path (Beg) +(0,-2.50cm) coordinate (VU);
+	\path (VU)  +(300:2.50cm) coordinate (VR);
+	\path (VU)  +(240:2.50cm) coordinate (VL);
+		
+	\path (VR)  +(300:2.50cm) coordinate (GhostR);
+	\path (VL)  +(240:2.50cm) coordinate (GhostL);
+		
+	% ----------------
+	% Dotted vertices
+	\node[dot] (VUDot) at (VU) +(0.00cm, 0.00cm);
+	\node[dot] (VLDot) at (VL) +(0.00cm, 0.00cm);
+	\node[dot] (VRDot) at (VR) +(0.00cm, 0.00cm);
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%Diagram
+	\diagram*{
+	
+	(Beg) -- [thick, gluon, momentum = \(\boldsymbol{k}\)] (VU),
+	
+	(VU) --	[thick, gluon, momentum' = \(\boldsymbol{k+q}\)] (VL)
+		 -- [very thick, ghost, momentum' = \(\boldsymbol{k}\)] (GhostL),		
+		 
+	(GhostR) -- [very thick, ghost, momentum' = \(\boldsymbol{0}\)] (VR)
+			 -- [thick, gluon, momentum' = \(\boldsymbol{q}\)] (VU),
+		 
+	(VR) -- [very thick, ghost, rmomentum = \(\boldsymbol{q}\)] (VL),	 
+		 
+	};
+	
+	
+	\end{feynman}
+	
+\end{tikzpicture}

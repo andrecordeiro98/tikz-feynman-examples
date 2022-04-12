@@ -1,0 +1,21 @@
+%--------------------------
+% Choose your font here
+\usepackage{cmbright} 	% Sans-serif font similar to LaTeX default. Math mode looks good.
+%\usepackage{kpfonts}	% Palatino-like font. Pretty
+
+\usepackage{bm} % Make sure \boldsymbol works
+
+
+%--------------------------
+% Enabling \mathscr{} for pretty calligraphic fonts. :)
+
+\makeatletter
+\DeclareFontEncoding{LS1}{}{}
+\DeclareFontEncoding{LS2}{}{\noaccents@}
+\DeclareFontSubstitution{LS1}{stix}{m}{n}
+\DeclareFontSubstitution{LS2}{stix}{m}{n}
+\makeatother
+
+\DeclareMathAlphabet\mathscr{LS1}{stixscr}{m}{n}
+\SetMathAlphabet\mathscr{bold}{LS1}{stixscr}{b}{n}
+\makeatother

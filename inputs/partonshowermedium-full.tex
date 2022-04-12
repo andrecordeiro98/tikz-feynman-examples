@@ -1,0 +1,198 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{partonshowermedium-full} 
+%
+%\newlength{\QGPlength}\setlength{\QGPlength}{12.00cm}
+%\newlength{\QGPheight}\setlength{\QGPheight}{9.00cm}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE TO SELF:
+% 	IN TEXSTUDIO, COMMENT MULTIPLE LINES AT ONCE WITH CTRL+T
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{tikzpicture}
+\begin{feynman}
+
+    % ------------------------------------------------
+	% QGP overlay
+    \useasboundingbox (0, 0.5*\QGPheight) rectangle (\QGPlength, -0.5*\QGPheight);
+    \path[left color=orange!70,right color=white, overlay] (0, 0.5*\QGPheight) rectangle (\QGPlength, -0.5*\QGPheight);
+
+	% ---------------------
+	% Blob & Shower origin
+	\coordinate (Blob) at (1.20cm,0.00cm);
+	\path (Blob) +(1.00cm,0.00cm) coordinate (Origin);
+
+
+    % ------------------------------------------------
+	% Coordinates: Vacuum Shower 
+	
+	\path (Origin) +(2.00cm,0.00cm) coordinate (PairCreation);
+
+	% Main Branches	
+	\path (PairCreation) +(+30:7.00cm) coordinate (EndUpperBranch);
+	\path (PairCreation) +(-30:7.00cm) coordinate (EndLowerBranch);
+
+	\path (EndUpperBranch) +(+20:1.50cm) coordinate (UpperGluon);
+	\path (EndUpperBranch) +(-40:1.50cm) coordinate (UpperFermion);
+
+	\path (EndLowerBranch) +(-35:1.50cm) coordinate (LowerGluon);
+	\path (EndLowerBranch) +(+20:1.50cm) coordinate (LowerFermion);
+
+	% 'First Emission' branch
+	\path (PairCreation) +(+30:0.75cm) coordinate (Emission1);
+		%
+		\path (Emission1) +(+00:2.50cm) coordinate (Gluon1);
+			%
+			\path (Gluon1) +(+15:2.00cm) coordinate (Gluon1a);
+				\path (Gluon1a) +(+10:2.50cm) coordinate (Fermion1a);
+				\path (Gluon1a) +(-10:2.50cm) coordinate (Fermion1b);
+			%
+			\path (Gluon1) +(-20:3.00cm) coordinate (Gluon1b);
+				\path (Gluon1b) +(+15:1.75cm) coordinate (Gluon1c);			
+				\path (Gluon1b) +(-15:1.75cm) coordinate (Gluon1d);			
+
+	% 'Second Emission' branch
+	\path (PairCreation) +(-30:5.25cm) coordinate (Emission2);
+		%
+		\path (Emission2) +(+20:2.00cm) coordinate (Gluon2);
+			%
+			\path (Gluon2) +(+15:1.00cm) coordinate (Fermion2a);	
+			\path (Gluon2) +(-10:1.00cm) coordinate (Fermion2b);	
+
+	% ------------------------------------------------
+	% Coordinates: Medium-induced emissions
+
+	% Induced upper branch	
+	\path (PairCreation) +(+30:4.50cm) coordinate (InducedEmission1);
+		%
+		\path (InducedEmission1) +(-10:2.50cm) coordinate (InducedGluon1);
+			%
+			\path (InducedGluon1) +(+15:1.00cm) coordinate (InducedFermion1a);	
+			\path (InducedGluon1) +(-10:1.00cm) coordinate (InducedFermion1b);	
+
+	% Induced lower branch	
+	\path (PairCreation) +(-30:2.00cm) coordinate (InducedEmission2);
+		%
+		\path (InducedEmission2) +(-65:3.50cm) coordinate (InducedGluon2);
+
+
+	% ------------------------------------------------
+	% Coordinates: Medium collisions
+
+	% Upper branch collision
+	\path (PairCreation) +(+30:2.50cm) coordinate (CollEnd1);
+		%
+		\path (CollEnd1) +(90:0.90cm) coordinate (CollInit1);
+			%
+			\path (CollInit1) +(160:0.75cm) coordinate (CollIncoming1);	
+			\path (CollInit1) +(030:0.75cm) coordinate (CollOutgoing1);	
+
+	% Middle branch collision
+	\path (Gluon1) +(-20:1.50cm) coordinate (CollEnd2Aux);
+	\path (CollEnd2Aux) +(0cm,-0.08cm) coordinate (CollEnd2); % Because gluons curl
+		%
+		\path (CollEnd2) +(-90:0.90cm) coordinate (CollInit2);
+			%
+			\path (CollInit2) +(200:0.75cm) coordinate (CollIncoming2);	
+			\path (CollInit2) +(-30:0.75cm) coordinate (CollOutgoing2);		
+
+	% Lower branch collision
+	\path (PairCreation) +(-30:0.70cm) coordinate (CollEnd3);
+		%
+		\path (CollEnd3) +(-90:0.90cm) coordinate (CollInit3);
+			%
+			\path (CollInit3) +(200:0.75cm) coordinate (CollIncoming3);	
+			\path (CollInit3) +(-30:0.75cm) coordinate (CollOutgoing3);		
+	
+	% ------------------------------------------------
+	% Coordinates: Medium recoil
+	
+	\path (CollOutgoing2) +(220:0.70cm) coordinate (RecoilIncoming);
+	\path (CollOutgoing2) +(005:1.30cm) coordinate (RecoilOutgoing);
+	
+    % ------------------------------------------------
+	% Diagram
+	\diagram*{
+
+    % -----------------------
+	% Diagram: Vacuum Shower 
+
+	% Main branches and pair creation 	
+	(Origin) -- [photon] (PairCreation),
+						 
+	(LowerFermion)	-- [fermion] (EndLowerBranch)
+					-- [fermion] (PairCreation) 
+					-- [fermion] (EndUpperBranch) 
+					-- [fermion] (UpperFermion),
+	
+	(UpperGluon) -- [gluon] (EndUpperBranch),
+	(LowerGluon) -- [gluon] (EndLowerBranch),
+
+	% 'First Emission' branch
+	(Emission1) -- [gluon] (Gluon1) 
+				-- [gluon] {(Gluon1a), (Gluon1b)},
+	
+	(Fermion1b) -- [fermion] (Gluon1a)
+				-- [fermion] (Fermion1a),
+	
+	{(Gluon1c), (Gluon1d)} -- [gluon] (Gluon1b),
+
+	% 'Second Emission' branch
+
+	(Emission2) -- [gluon] (Gluon2),
+	
+	(Fermion2a) -- [fermion] (Gluon2) 
+				-- [fermion] (Fermion2b),
+				
+	% ------------------------------------------------
+	% Coordinates: Medium-induced emissions
+
+	% Induced upper branch	
+	(InducedEmission1) -- [gluon] (InducedGluon1),
+
+	(InducedFermion1a)	-- [fermion] (InducedGluon1) 
+					 	-- [fermion] (InducedFermion1b),
+
+	% Induced lower branch	
+	(InducedGluon2) -- [gluon] (InducedEmission2),	
+
+	% ------------------------------------------------
+	% Coordinates: Medium collisions
+	
+	% Upper branch collision
+	(CollEnd1) -- [gluon] (CollInit1),
+
+	(CollIncoming1)	-- [fermion] (CollInit1) 
+					-- [fermion] (CollOutgoing1),
+
+	% Middle branch collision
+	(CollEnd2) -- [gluon] (CollInit2),
+
+	(CollIncoming2)	-- [fermion] (CollInit2) 
+					-- [fermion] (CollOutgoing2),
+
+
+	% Lower branch collision
+	(CollEnd3) -- [gluon] (CollInit3),
+	
+	(CollIncoming3)	-- [fermion] (CollInit3) 
+					-- [fermion] (CollOutgoing3),
+	
+	% ------------------------------------------------
+	% Coordinates: Medium recoil
+
+	(RecoilIncoming) -- [gluon] (CollOutgoing2)
+					 -- [fermion] (RecoilOutgoing),
+
+	};
+
+    % ------------------------------------------------
+	% Blob Drawing
+	\vertex[blob] (b) at (Blob) {}; 
+
+   	% ------------------------------------------------
+	% Medium recoils dot
+	\node[red,dot] (RD) at (CollOutgoing2);
+
+\end{feynman}
+\end{tikzpicture}

@@ -1,0 +1,50 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdloops-ghostloop} 
+%
+\begin{tikzpicture}
+	
+	\begin{feynman}
+		
+	% ------------------------------------------------
+	% Ensure the dimensions of graphic are appropriate
+	%\useasboundingbox (0, 0.7*\loopsh) rectangle (\loopsw, -0.7*\loopsh);
+	
+	% ------------------------------------------------
+	% Relevant coordinates
+	\coordinate (Beg) at (0.20cm,0);
+	
+	\path (Beg) +(2.50cm,0) coordinate (V1);
+	\path (V1)  +(2.50cm,0) coordinate (V2);
+	\path (V2)  +(2.50cm,0) coordinate (End);
+	
+	\path (V1)				+(0.00cm,1.20cm) coordinate (LabelStartUpper);
+	\path (LabelStartUpper)	+(2.50cm,0.00cm) coordinate (LabelEndUpper);
+	
+	\path (V1)				+(0.00cm,-1.20cm) coordinate (LabelStartLower);
+	\path (LabelStartLower)	+(2.50cm,0.00cm) coordinate (LabelEndLower);
+	
+	% ----------------
+	% Dotted vertices
+	\node[dot] (V1Dot) at (V1) +(0.00cm, 0.00cm);
+	\node[dot] (V2Dot) at (V2) +(0.00cm, 0.00cm);
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%Diagram
+	\diagram*{
+		
+		(Beg)	-- [thick, gluon, momentum' = \(\boldsymbol{k}\)] (V1), 
+		(End)	-- [thick, gluon, rmomentum = \(\boldsymbol{k}\)] (V2),
+		
+		(LabelStartUpper) -- [opacity=0, momentum = \(\boldsymbol{k-\frac{q}{2}}\)] (LabelEndUpper),
+		
+		(LabelStartLower) -- [opacity=0, rmomentum' = \(\boldsymbol{k+\frac{q}{2}}\)] (LabelEndLower),
+		
+	};
+	
+	\draw[very thick, ghost] (V1) arc [start angle=180, end angle=0, radius=1.25cm];
+	\draw[very thick, ghost] (V2) arc [start angle=0, end angle=-180, radius=1.25cm];
+	
+		
+	\end{feynman}
+	
+\end{tikzpicture}

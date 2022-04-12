@@ -1,0 +1,24 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdrules-propagatorghost} 
+%
+\begin{tikzpicture}
+
+	%Vertices
+	\node (Beg) {\(\phantom{\mu,}a\)};
+	
+	\node (V1) at (4.00cm,0.00cm) {\(b\phantom{\nu,}\)};
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{feynman}
+
+    %Diagram
+    \diagram*{
+
+    (Beg) -- [very thick, 
+              ghost, % See config-feynman.tex for re-definition of 'ghost'
+              momentum = \( \boldsymbol{p} \)] (V1), %momentum' == arrow on the outside
+
+    };
+    
+    \end{feynman}
+\end{tikzpicture}

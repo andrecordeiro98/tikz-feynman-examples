@@ -1,0 +1,46 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdloops-gluontadpole} 
+%
+\begin{tikzpicture}
+	
+	\begin{feynman}
+	
+	% ------------------------------------------------
+	% Ensure the dimensions of graphic are appropriate
+	%\useasboundingbox (0, 0.7*\loopsh) rectangle (\loopsw, -0.7*\loopsh);
+	
+	% ------------------------------------------------
+	% Relevant coordinates
+	\coordinate (Beg) at (0.20cm,0);
+	
+	\path (Beg) +(2.50cm,0) coordinate (V1);
+	\path (V1)  +(2.50cm,0) coordinate (End);
+	
+	% Loop should start slightly above line
+	\path (V1)	+(-0.05cm,0.15cm) coordinate (V1LoopStart);
+	
+	% Loop Label
+	\path (V1LoopStart)	+(-1.15cm,2.50cm) coordinate (LabelStart);
+	\path (LabelStart)	+( 2.50cm,0.00cm) coordinate (LabelEnd);
+		
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+	%Diagram
+	\diagram*{
+						
+		(V1)	-- [thick, gluon, rmomentum = \(\boldsymbol{k}\)] (Beg),
+		(End)	-- [thick, gluon, rmomentum = \(\boldsymbol{k}\)] (V1),
+	
+		(LabelStart) -- [opacity=0, momentum = \(\boldsymbol{q}\)] (LabelEnd),
+	
+	};
+	
+	% Draw the loop
+	%\draw[<options>] (x,y) arc (start:stop:radius);
+	\draw[thick, gluon] (V1LoopStart) arc (-95:272:1.25cm);
+	
+	% Draw the vertex dot
+	\node[dot, above right = 0.00cm and -0.04cm of V1] (Dot);
+		
+	\end{feynman}
+	
+\end{tikzpicture}

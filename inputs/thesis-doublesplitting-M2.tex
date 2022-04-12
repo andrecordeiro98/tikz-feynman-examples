@@ -1,0 +1,64 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{thesis-doublesplitting-M2} 
+%
+\begin{tikzpicture}
+
+	% ------------------------------------------------
+	% Ensure the dimensions of graphic are appropriate
+	\useasboundingbox (0, 0.5*\imageh) rectangle (\imagew, -0.5*\imageh);
+	
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	\coordinate (Blob) at (1.50cm, -0.75cm);
+	
+	\path (Blob) +(1.00cm, 0.00cm) coordinate (Mother);	        
+    
+    % Specify the quark endpoints
+    \path (Mother) +(2.50cm,0.00cm) coordinate (Emission1);
+    \path (Mother) +(5.00cm,0.00cm) coordinate (Emission2);
+    \path (Mother) +(7.50cm,0.00cm) coordinate (Final);
+
+	% Specify gluon endpoints
+	% NOTE: Here, we use relative polar coordinates
+
+	% Gluon labeled k2
+	\path (Emission1) +(10:5.00cm) coordinate (Gluon2); % 30 degrees, 2.50 cm away from (Emission1)
+
+	% The arrow for momentum k2
+	\path (Emission1) 	+(10:3.00cm) coordinate (ArrowStart2);
+	\path (ArrowStart2) +(10:2.50cm) coordinate (ArrowEnd2);
+
+	% Gluon labeled k1
+	\path (Emission2) +(65:2.50cm) coordinate (Gluon1);
+
+	% The arrow for momentum k1
+	\path (Emission2) 	+(65:0.70cm) coordinate (ArrowStart1);
+	\path (ArrowStart1) +(65:2.00cm) coordinate (ArrowEnd1);
+
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{feynman}
+        		    	
+	% Diagram
+	\diagram*{ %ALWAYS END LINES WITH A COMMA
+	
+	(Mother) 	-- [thick, fermion, momentum'=\( \boldsymbol{ p_{i}^{}} \)] (Emission1)
+			 	-- [thick, fermion, momentum'=\( \boldsymbol{ q_{2}^{}} \)] (Emission2)
+			 	-- [thick, fermion, momentum'=\( \boldsymbol{ p_{f}^{}} \)] (Final),
+
+	% This separation happens to avoid overlaps
+	(ArrowStart2)	-- [white, momentum = \( \boldsymbol{k_{2}^{}} \)] (ArrowEnd2),
+	(Gluon2)		-- [thick, gluon] (Emission1),
+
+
+	(ArrowStart1)	-- [white, momentum = \( \boldsymbol{k_{1}^{}} \)] (ArrowEnd1),
+	(Gluon1)		-- [thick, gluon] (Emission2),
+	
+	};
+
+    % The Blob
+	\vertex[blob] (m) at (Blob) {\scalebox{2.0}{$\mathcal{M}^{ }_{\it h}$}}; 
+	
+    \end{feynman}  
+  
+\end{tikzpicture}

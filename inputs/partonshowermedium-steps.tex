@@ -1,0 +1,38 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{partonshowermedium-steps} 
+%
+\newlength{\QGPlength}\setlength{\QGPlength}{12.00cm}
+\newlength{\QGPheight}\setlength{\QGPheight}{9.00cm}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE TO SELF:
+% 	IN TEXSTUDIO, COMMENT MULTIPLE LINES AT ONCE WITH CTRL+T
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{tikzpicture}
+\begin{feynman}
+		
+% Proper size --- Bounding box
+\useasboundingbox (0, 0.5*\QGPheight) rectangle (\QGPlength, -0.5*\QGPheight);
+
+% ------------------------------------------------
+% COMMENT THESE LINES TO SEE THE INDIVIDUAL STEPS
+% ------------------------------------------------	
+
+% QGP Effect
+\path[left color=orange!70,right color=white, overlay] (0, 0.5*\QGPheight) rectangle (\QGPlength, -0.5*\QGPheight);
+
+% Vacuum emissions
+\input{inputs/partonshowermedium-1-vacuum}
+	
+% Medium induced emissions
+\input{inputs/partonshowermedium-2-induced}
+
+% Medium collisions
+\input{inputs/partonshowermedium-3-collisions}
+
+% Medium Recoils
+\input{inputs/partonshowermedium-4-recoils}	
+			
+\end{feynman}
+\end{tikzpicture}

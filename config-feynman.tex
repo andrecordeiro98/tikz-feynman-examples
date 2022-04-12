@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONFIG FILE FOR TIKZ-FEYNMAN
+
+% ----------------------
+% Tikz-Feynman configurations:
+
+% Shorter momentum arrows, farther from the diagram:
+\tikzfeynmanset{/tikzfeynman/momentum/arrow distance=3.0mm}
+\tikzfeynmanset{/tikzfeynman/momentum/arrow shorten= .30}
+
+% ----------------------
+% Momentum arrows in black by default
+\tikzfeynmanset{momentum/arrow style = {Black}}
+
+
+% ---------------------
+% DEFINE GHOSTS TO HAVE ARROWS AND ROUND DOTS
+
+\makeatletter
+\tikzset{
+	dot diameter/.store in=\dot@diameter,
+	dot diameter=3pt,
+	dot spacing/.store in=\dot@spacing,
+	dot spacing=3pt,
+	dots/.style={
+		line width=\dot@diameter,
+		line cap=round,
+		dash pattern=on 0pt off \dot@spacing
+	}
+}
+\makeatother
+
+\tikzfeynmanset{
+	ghost/.style={
+    	/tikz/draw=none,
+		/tikz/decoration={name=none},
+		/tikz/postaction={
+		/tikz/draw,
+		/tikz/dots,		%Using /tikz/dots (defined above) instead of /tikz dotted
+		/tikz/very thick,
+		/tikzfeynman/with arrow=0.5, % Arrow at midpoint of edge
+		},
+	}
+}
+
+
+
+% ---------------------
+% DEFINE BLOBS
+
+\tikzfeynmanset{
+	blob/.style={
+		/tikz/shape	= circle,
+		/tikz/draw	= black,			% Edge colour
+		/tikz/fill	= gray!40,			% Interior colour
+		% ---
+		/tikz/inner sep 	= 0.25 cm,	% Separation between label and edge (I presume)
+		/tikz/minimum size  = 2.00 cm,	% Minimum size, otherwise scales with label
+	}
+}
+
+
+%---------------------
+% ADD COLORS (OPIONAL)
+
+\tikzfeynmanset{
+	% A possible style:
+	%gluon/.append style	= {RoyalBlue},
+	momentum/arrow style 	= {Red!80!Black},
+	blob/.append style		= {/tikz/draw = RoyalBlue, /tikz/fill = RoyalBlue!20},
+}
+
+
+
+
+

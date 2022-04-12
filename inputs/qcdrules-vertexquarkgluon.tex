@@ -1,0 +1,33 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdrules-vertexquarkgluon} 
+%
+\begin{tikzpicture}
+
+	    
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	%		USE \node FOR LABELS, \coordinate FOR NO LABEL
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates: (angle:radius)
+	
+	\node (V1) at (180:2.50cm) {\(\mu, a\)};
+	\node (V2) at (+60:2.50cm) {\(i\)};
+	\node (V3) at (-60:2.50cm) {\(j\)};
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+    \begin{feynman}
+
+    %Diagram
+    \diagram*{
+
+	(V1) -- [thick, gluon] (C),
+    
+    (V3) -- [thick, fermion] (C)
+         -- [thick, fermion] (V2),
+
+    };
+    
+    \end{feynman}
+\end{tikzpicture}

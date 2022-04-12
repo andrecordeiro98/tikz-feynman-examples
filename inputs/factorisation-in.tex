@@ -1,0 +1,45 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{factorisation-in} 
+%
+\begin{tikzpicture}
+    \begin{feynman}
+    
+    %Vertices
+    \vertex (Mother) {\( x\sub{\rm in} \) } ;
+    
+    \vertex [above right = +0.00 cm and +3.00 cm of Mother] (Vertex);
+    
+    \vertex [above right = +1.50 cm and +3.00 cm of Vertex] (Daughter1);
+    \vertex [above right = -1.50 cm and +3.00 cm of Vertex] (Daughter2);
+
+    %FOR THE DASHES
+    \vertex [above right = +2.00 cm and +1.20 cm of Mother] (LeftUpp) {\(\mu\upp{2} + \delta\mu\upp{2}\)};
+    \vertex [above right = -2.00 cm and +1.20 cm of Mother] (LeftLow);
+    \vertex [above right = +0.00 cm and +4.20 cm of LeftUpp] (RightUpp) {\(\mu\upp{2}\)};
+    \vertex [above right = +0.00 cm and +4.20 cm of LeftLow] (RightLow);
+
+
+    %Diagram
+    \diagram*{ %ALWAYS END LINES WITH A COMMA
+    %(E,\boldsymbol{p_{ }^{}})
+    (Mother) -- [thick, edge label = { \( i \) } ] (Vertex), 
+                
+    (Vertex) -- [thick, edge label = { \( a \) } ] (Daughter1), 
+
+    (Vertex) -- [thick, edge label' = { \( j \) }] (Daughter2), 
+
+    (LeftUpp) -- [thick, dashed] (LeftLow),
+    (RightUpp) -- [thick, dashed] (RightLow),
+
+    };
+    
+    \end{feynman}
+    
+    %-------------------------------------------
+    %Labels
+    
+    \node[above right = -0.25 cm and 0.10 cm of Daughter1] (Daughter1Label) {\( x=z\,x\sub{\rm in} \)};
+
+    \node[above right = -0.35 cm and 0.10 cm of Daughter2] (Daughter2Label) {\( (1-z)\,x\sub{\rm in} \)};
+
+\end{tikzpicture}

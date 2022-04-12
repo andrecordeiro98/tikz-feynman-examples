@@ -1,0 +1,42 @@
+\documentclass[
+border={-10pt 0pt -6pt 0pt} % left bottom right top
+]{standalone} 
+
+% -----------------------
+% CONFIG FONTS
+\input{config-fonts}
+
+% -----------------------
+% CONFIG PACKAGES
+\input{config-packages}
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=./outputs/] % activate and define figures/ as cache folder
+\tikzset{external/force remake} % Always force remake in a standalone
+
+% -----------------------
+% TIKZ-FEYNMAN
+
+%Feynman Diagrams -- LuaLaTeX compiler needed
+\usepackage[compat=1.1.0]{tikz-feynman}
+\tikzfeynmanset{/tikzfeynman/warn luatex=false} % Except not really, you can turn off the warning
+
+% Configuration file -- sets the default colours for TIKZ-FEYNMAN elements
+\input{config-feynman.tex}
+
+% -----------------------
+% SOME COMMANDS
+
+\newcommand{\mycomment}[1]{}
+
+\newcommand{\sub}[1]{_{#1}^{}} %Subscripts with proper height
+\newcommand{\upp}[1]{_{}^{#1}} %Superscripts with proper height
+\newcommand{\ind}[2]{^{#1}_{#2}} %Both
+
+
+%--------------------------
+\begin{document}
+	
+\input{inputs/partonshowermedium-steps.tex}
+	
+\end{document}

@@ -1,0 +1,47 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{thesis-doublesplitting-M4} 
+%
+\begin{tikzpicture}
+		
+	% ------------------------------------------------
+	% Ensure the dimensions of graphic are appropriate
+	\useasboundingbox (0, 0.5*\imageh) rectangle (\imagew, -0.5*\imageh);
+	
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	\coordinate (Blob) at (1.50cm, -0.75cm);
+	
+	\path (Blob) +(1.00cm, 0.00cm) coordinate (Mother);	        
+	
+	% Specify the quark endpoints
+	\path (Mother)	  +(3.00cm,0.00cm)	coordinate (Emission1);
+	\path (Emission1) +(25:2.50cm)		coordinate (Emission2);
+	\path (Mother)    +(7.00cm,0.00cm)	coordinate (Final);
+	
+	% Specify gluon endpoints
+	% NOTE: Here, we use relative polar coordinates
+	\path (Emission2) +(30:2.50cm) coordinate (Ghost1); % 30 degrees, 2.50 cm away from Emission1
+	\path (Emission2) +(00:2.50cm) coordinate (Ghost2); 
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{feynman}
+		
+		% Diagram
+		\diagram*{ %ALWAYS END LINES WITH A COMMA
+			
+		(Mother) 	-- [thick, fermion, momentum'=\( \boldsymbol{ p_{i}^{}} \)] (Emission1)
+						-- [thick, fermion, momentum'=\( \boldsymbol{ p_{f}^{}} \)] (Final),
+			
+		(Emission2) -- [thick, gluon, rmomentum' = \( \boldsymbol{q_{4}^{}} \)] (Emission1),
+			
+		(Emission2) -- [very thick, ghost, momentum = \( \boldsymbol{k_{1}^{}} \)] (Ghost1),
+		(Ghost2) 	-- [very thick, ghost, rmomentum = \( \boldsymbol{k_{2}^{}} \)] (Emission2),
+			
+		};
+		
+		% The Blob
+		\vertex[blob] (m) at (Blob) {\scalebox{2.0}{$\mathcal{M}^{ }_{\it h}$}}; 
+		
+	\end{feynman}    
+		
+\end{tikzpicture}

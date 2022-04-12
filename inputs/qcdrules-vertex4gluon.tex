@@ -1,0 +1,42 @@
+\tikzsetnextfilename{qcdrules-vertex4gluon} % Set this figure's name when externalised 
+%
+\begin{tikzpicture}
+
+    
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	%		USE \node FOR LABELS, \coordinate FOR NO LABEL
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates:
+	
+	\node (V1) at (+135:2.56cm) {\(\mu, a\)};
+	\node (V2) at ( +45:2.56cm) {\(\nu, b\)};
+	\node (V3) at ( -45:2.56cm) {\(\rho,c\)};
+	\node (V4) at (-135:2.56cm) {\(\sigma,d\)};
+	
+	%Pointless, except it extends the image into a square
+	%\node (Placeholder) at (0:2.50cm) {\phantom{\(\mu, a\)}};
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+    \begin{feynman}
+
+    %Diagram
+    \diagram*{
+
+    %(C) -- [thick, gluon, rmomentum =\({ \boldsymbol{p_{1}^{}} }\)] (V1),
+    %(C) -- [thick, gluon, rmomentum =\({ \boldsymbol{p_{2}^{}} }\)] (V2),
+    %(C) -- [thick, gluon, rmomentum =\({ \boldsymbol{p_{3}^{}} }\)] (V3),
+    %(C) -- [thick, gluon, rmomentum =\({ \boldsymbol{p_{4}^{}} }\)] (V4),
+
+    (V1) -- [thick, gluon, momentum' =\({ \boldsymbol{p_{1}^{}} }\)] (C),
+	(V2) -- [thick, gluon, momentum' =\({ \boldsymbol{p_{2}^{}} }\)] (C),
+	(V3) -- [thick, gluon, momentum' =\({ \boldsymbol{p_{3}^{}} }\)] (C),
+	(V4) -- [thick, gluon, momentum' =\({ \boldsymbol{p_{4}^{}} }\)] (C),
+
+
+    };
+    
+    \end{feynman}
+\end{tikzpicture}

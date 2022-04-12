@@ -1,0 +1,44 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcdrules-vertex3gluon}
+%
+\begin{tikzpicture}
+
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	%		USE \node FOR LABELS, \coordinate FOR NO LABEL
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates:
+	
+	\node (V1) at (180:2.50cm) {\(\mu, a\)};
+	\node (V2) at (+60:2.50cm) {\(\nu, b\)};
+	\node (V3) at (-60:2.50cm) {\(\rho,c\)};
+	
+	%Pointless, except it extends the image into a square
+	%\coordinate (Placeholder) at (0:2.50cm) {\phantom{\(\mu, a\)}};
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+    \begin{feynman}
+
+    %Diagram
+    \diagram*{
+
+    (V1) -- [thick, gluon, momentum' =\({ \boldsymbol{p_{1}^{}} }\)
+    		,decoration={pre length=.00cm, post length=.05cm}
+			] (C),
+
+    (V2) -- [thick, gluon, momentum' =\({ \boldsymbol{p_{2}^{}} }\)
+    		,decoration={pre length=.00cm, post length=.05cm}
+            ] (C),
+
+	%momentum' == arrow on the outside
+    (V3) -- [thick, gluon, momentum' =\({ \boldsymbol{p_{3}^{}} }\)
+    		,decoration={pre length=.00cm, post length=.05cm}
+           	] (C),
+
+    };
+    
+    \end{feynman}
+
+\end{tikzpicture}

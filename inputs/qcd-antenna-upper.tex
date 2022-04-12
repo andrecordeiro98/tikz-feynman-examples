@@ -1,0 +1,50 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcd-antenna-upper} 
+%
+\begin{tikzpicture}
+\begin{feynman}
+
+	% ---------------------
+	% Blob & Shower origin
+	\coordinate (Blob) at (1.20cm,0.00cm);
+	\path (Blob) +(1.00cm,0.00cm) coordinate (Origin);
+
+	\path (Origin) +(2.00cm,0.00cm) coordinate (PairCreation);
+
+	\path (PairCreation) +(+35:2.50cm) coordinate (Emission);
+	\path (Emission) 	 +(+35:2.50cm) coordinate (Quark);
+	
+	\path (PairCreation) +(-35:5.00cm) coordinate (AntiQuark);
+	
+	\path (Emission) +(-35:2.50cm) coordinate (Gluon);
+
+
+
+	% ---------------------	
+	\diagram*{
+	
+	(Origin) -- [thick, photon] (PairCreation),
+	
+	(AntiQuark) -- [thick, fermion, rmomentum = \(\boldsymbol{\overline{p}}\)] (PairCreation)
+				-- [thick, fermion, momentum  = \(\boldsymbol{p+k}\)] 			(Emission)
+				-- [thick, fermion, momentum  = \(\boldsymbol{p}\)] 			(Quark),
+				
+	(Gluon) -- [thick, gluon, rmomentum = \(\boldsymbol{k}\)] (Emission),
+	
+	};
+
+    % ------------------------------------------------
+	% Blob Drawing
+	\vertex[blob] (b) at (Blob) {\scalebox{2.00}{$\mathcal{B}$}}; 
+
+	% ------------------------------------------------
+	% Angles
+	\path (PairCreation) +(0:0.50cm) coordinate (PairCreationAngle);
+	\pic [draw, <->, "$\quad\theta\sub{p\overline{p}}$", angle eccentricity=1.5] {angle = AntiQuark--PairCreationAngle--Quark};    
+
+	\path (Emission) +(0:0.50cm) coordinate (EmissionAngle);
+	\pic [draw, <->, "$\quad\theta\sub{pk}$", angle eccentricity=1.5] {angle = Gluon--EmissionAngle--Quark};    
+	
+
+	
+\end{feynman}\end{tikzpicture}

@@ -1,0 +1,29 @@
+% ------------------------------------------------
+% Coordinates: Medium recoil
+
+\path (CollOutgoing1) +(120:0.70cm) coordinate (RecoilIncoming1);
+\path (CollOutgoing1) +(005:1.30cm) coordinate (RecoilOutgoing1);
+
+\path (CollOutgoing2) +(220:0.70cm) coordinate (RecoilIncoming2);
+\path (CollOutgoing2) +(005:1.30cm) coordinate (RecoilOutgoing2);
+
+
+
+% ------------------------------------------------
+% Diagram: Medium recoil
+
+\diagram*{
+
+(RecoilIncoming1)	-- [gluon] (CollOutgoing1)
+					-- [fermion] (RecoilOutgoing1),
+
+(RecoilIncoming2)	-- [gluon] (CollOutgoing2)
+					-- [fermion] (RecoilOutgoing2),
+
+
+};
+
+% ------------------------------------------------
+% Medium recoils dot
+\node[red,dot] (RD1) at (CollOutgoing1);
+\node[red,dot] (RD2) at (CollOutgoing2);
