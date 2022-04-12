@@ -2,7 +2,7 @@
 
 Some examples for creating Feynman diagrams with the LaTeX package tikz-feynman. Using externalisation, changing the style of multiple images at once is made convenient.
 
-A basic description is included below, for further instructions, see the document `Examples-tikz-feynman.pdf`, which also includes example images.
+A basic description is included below, for further instructions, see the document `examples-tikz-feynman.pdf`, which also includes example images.
 
 ## main-general.tex
 
