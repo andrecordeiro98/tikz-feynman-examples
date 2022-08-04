@@ -1,0 +1,118 @@
+% ---------------------
+% Blob & Shower origin
+\coordinate (BlobDagger) at (2.50cm,-3.00cm);
+\path (BlobDagger) +(1.00cm,0.00cm) coordinate (Origin); % Just outside the blob
+
+% ------------------------------------------------
+% Blob Drawing
+\vertex[blob, thick] (b) at (BlobDagger) {}; 
+
+% ------------------------------------------------
+% Splitting
+\path (Origin)		+(+00:4.50cm) coordinate (EmissionDagger);
+\path (EmissionDagger)	+(+25:4.00cm) coordinate (GluonEnd);
+\path (EmissionDagger)	+(-10:4.00cm) coordinate (QuarkEnd);
+
+\node[black,dot] (v) at (EmissionDagger);
+
+% ------------------------------------------------
+% ------------------------------------------------
+% ------------------------------------------------
+% Medium modifications
+
+
+% ----------------------------
+% A loop for pre-emission interactions
+
+\path (Origin) +(0.40cm,-0.85cm) coordinate (A1);
+\vertex[crossed dot, thick] (a1) at (A1) {};
+
+\path (A1) +(0.00cm,+0.15cm) coordinate (As1);
+\path (A1) +(0.00cm,+0.85cm) coordinate (Ae1);
+
+\foreach \i in {2,...,4}
+{
+	
+	\pgfmathtruncatemacro{\prev}{\i - 1}; % Compute previous index #RealProgrammingLanguage
+	
+	\path (A\prev) +(+00:1.20cm) coordinate (A\i); % Next scattering centre
+	
+	\vertex[crossed dot, thick] (a) at (A\i) {}; % Draw crossed dot
+	
+	\path (A\i) +(0.00cm,+0.15cm) coordinate (As\i); % Start of exchanged gluons
+	\path (A\i) +(0.00cm,+0.85cm) coordinate (Ae\i); % End of exchanged gluons
+	
+}
+
+% ----------------------------
+% A loop for post-emission interactions
+
+% The first quark-medium scattering
+\path (EmissionDagger) +(0.70cm,-1.00cm) coordinate (Q1);
+\vertex[crossed dot, thick] (q) at (Q1) {};
+
+\path (Q1) +(0.00cm,+0.15cm) coordinate (Qs1); % Start of exchanged gluon
+\path (Q1) +(0.00cm,+0.87cm) coordinate (Qe1); % End of exchanged gluon
+
+% The first gluon-medium scattering
+\path (EmissionDagger) +(0.70cm,+1.50cm) coordinate (G1);
+\vertex[crossed dot, thick] (g) at (G1) {};
+
+\path (G1) +(0.00cm,-0.15cm) coordinate (Gs1); % Start of exchanged gluon
+\path (G1) +(0.00cm,-1.10cm) coordinate (Ge1); % End of exchanged gluon
+
+% ----------
+% A LOOP !!!
+\foreach \i in {2,...,3}
+{
+	
+	\pgfmathtruncatemacro{\prev}{\i - 1}; % Compute previous index #RealProgrammingLanguage
+	
+	% -----------
+	% QUARK
+	
+	\path (Q\prev) +(-10:1.20cm) coordinate (Q\i); % Next scattering centre
+	
+	\vertex[crossed dot, thick] (q) at (Q\i) {}; % Draw crossed dot
+	
+	\path (Q\i) +(0.00cm,+0.15cm) coordinate (Qs\i); % Start of exchanged gluons
+	\path (Q\i) +(0.00cm,+0.87cm) coordinate (Qe\i); % End of exchanged gluons
+	
+	% -----------
+	% GLUON
+	
+	\path (G\prev) +(+25:1.20cm) coordinate (G\i); % Next scattering centre
+	
+	\vertex[crossed dot, thick] (g) at (G\i) {}; % Draw crossed dot
+	
+	\path (G\i) +(0.00cm,-0.15cm) coordinate (Gs\i); % Start of exchanged gluons
+	\path (G\i) +(0.00cm,-1.10cm) coordinate (Ge\i); % End of exchanged gluons
+	
+}
+
+
+
+% ------------------------------------------------
+% Diagram:
+\diagram*{
+	
+	% --------
+	% Emission	
+	(Origin) -- [fermion, thick] (EmissionDagger) -- [fermion, thick] (QuarkEnd),
+	(GluonEnd) -- [gluon, thick] (EmissionDagger),
+	
+	% --------
+	% Scatterings	
+	
+	(As1) -- [gluon, thick] (Ae1),
+	(As2) -- [gluon, thick] (Ae2),
+	(As3) -- [gluon, thick] (Ae3),
+	(As4) -- [gluon, thick] (Ae4),
+	
+	\foreach \i in {1,...,3}
+	{ 
+		(Qs\i) -- [gluon, thick] (Qe\i),	
+		(Gs\i) -- [gluon, thick] (Ge\i),
+	}	
+	
+};

@@ -1,0 +1,51 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{medium-modified-splitting} 
+%
+\newlength{\length}\setlength{\length}{12.50cm}
+\newlength{\height}\setlength{\height}{14.00cm}
+
+\begin{tikzpicture}
+	\begin{feynman}
+		
+	% ---------------------
+	% Proper size --- Bounding box
+	\useasboundingbox (0, 0.5*\height) rectangle (\length, -0.5*\height);	
+
+	% ----------------
+	% M and MDagger
+		
+	\input{inputs/medium-modified-splitting-M}	
+
+	\input{inputs/medium-modified-splitting-Mdagger}
+
+	% ----------------
+	% LABELS M
+	\path (Blob)	+(-2.25cm,+0.00cm) coordinate (LabelM);
+	\vertex at (LabelM) {\qquad \scalebox{1.5}{$\mathcal{M}\hphantom{\upp{\dagger}}:$}};
+
+	\path (BlobDagger)	+(-2.25cm,+0.00cm) coordinate (LabelMDagger);
+	\vertex at (LabelMDagger) {\qquad \scalebox{1.5}{$\mathcal{M}\upp{\dagger}:$}};
+
+	
+	% ----------------
+	% LINES
+	\path (Emission)		+(0.00cm,+3.00cm) coordinate (StartLineUp);
+	\path (Emission)		+(0.00cm,-9.00cm) coordinate (StartLineDown);
+
+	\path (EmissionDagger)	+(0.00cm,+9.00cm) coordinate (EndLineUp);
+	\path (EmissionDagger)	+(0.00cm,-3.00cm) coordinate (EndLineDown);
+		
+	\draw[dashed, thick] (StartLineDown) -- (StartLineUp);
+	\draw[dashed, thick] (EndLineDown) -- (EndLineUp);
+
+	% ----------------
+	% LABELS
+	
+	\path (StartLineUp)	+(-0.35cm,+0.30cm) coordinate (LabelT);
+	\path (EndLineUp) 	+(-0.35cm,+0.30cm) coordinate (LabelTDagger);
+	
+	\vertex at (LabelT) {\qquad \scalebox{1.5}{$t$}};
+	\vertex at (LabelTDagger) {\qquad \scalebox{1.5}{$t'$}};
+		
+	\end{feynman}
+\end{tikzpicture}
