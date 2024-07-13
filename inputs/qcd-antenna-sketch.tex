@@ -1,0 +1,63 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{qcd-antenna-sketch} 
+
+
+\begin{tikzpicture}
+	\begin{feynman}
+		
+		% ---------------------
+		% Blob & Shower origin
+		\coordinate (Blob) at (1.20cm,0.00cm);
+		\path (Blob) +(1.00cm,0.00cm) coordinate (Origin);
+		
+		\path (Origin) +(2.00cm,0.00cm) coordinate (PairCreation);
+		
+		\path (PairCreation) +(+25:5.00cm) coordinate (Quark);
+		\path (PairCreation) +(-25:5.00cm) coordinate (AntiQuark);
+		
+		\path (PairCreation) +(+25:3.25cm) coordinate (Emission);		
+		
+		\path (Emission) +(+55:2.50cm) coordinate (Gluon);
+		
+		
+		
+		% ---------------------	
+		\diagram*{
+			
+			(Origin) -- [thick, photon] (PairCreation),
+			
+			(AntiQuark) -- [thick, fermion] (PairCreation)
+						-- [thick, fermion] (Quark),
+						
+			
+			(Gluon) -- [thick, gluon] (Emission),
+			
+		};
+		
+		% ------------------------------------------------
+		% Blob Drawing
+		\vertex[blob] (b) at (Blob) {\scalebox{2.00}{$\mathcal{B}$}}; 
+		
+		% ------------------------------------------------
+		% Angles
+		\path (PairCreation) +(0:0.50cm) coordinate (PairCreationAngle);
+		\pic [draw, <->, "$\,\,\Theta$", angle eccentricity=1.5] {angle = AntiQuark--PairCreationAngle--Quark};    
+		
+		\path (Emission) +(+1.20cm:+0.60cm) coordinate (EmissionAngle);
+		\path (Quark) 	 +(-1.20cm:+0.05cm) coordinate (QuarkDraw);
+		\pic [draw, <->, "$\,\,\theta$", angle eccentricity=1.5] {angle = QuarkDraw--EmissionAngle--Gluon};    
+		
+		\coordinate (PairCreationTimeScale) at (4.20cm, -3.00cm);		
+		\coordinate (GluonTimeScale) at (7.25cm, -3.00cm);
+		\draw [thick, |->] (PairCreationTimeScale)--(GluonTimeScale) node[midway, above] {$t_{\rm form}$};
+		
+		\path (Gluon) +(0.20cm, +0.50cm) coordinate (GluonUpper);
+		\path (Gluon) +(0.20cm, -0.50cm) coordinate (GluonLower);
+		\draw[thick, <->] (GluonLower)--(GluonUpper) node[midway, right] {$\lambda_{\perp} \sim \dfrac{1}{k_\perp}$};
+
+		\path (Emission) +(0.20cm, -0.25cm) coordinate (EmissionUpper);
+		\path (EmissionUpper) +(0.00cm, -2.25cm) coordinate (EmissionLower);
+		\draw[thick, <->] (EmissionUpper)--(EmissionLower) node[midway, right] {$\Delta b_{\perp} \sim t_{\rm form} \, \Theta$};
+
+		
+\end{feynman}\end{tikzpicture}

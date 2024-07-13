@@ -1,0 +1,45 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{quark-branch} 
+%
+\begin{tikzpicture}
+	
+	
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	%		USE \node FOR LABELS, \coordinate FOR NO LABEL
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates: (angle:radius)
+	
+	\coordinate (V1) at (0.00cm,0) {};
+	\coordinate (V2) at (2.00cm,0) {};
+	\coordinate (V3) at (4.00cm,0) {};
+	\coordinate (V4) at (6.00cm,0) {};
+	\coordinate (V5) at (8.00cm,0) {};
+	
+	% Specify the gluon nodes as polar coordinates from offset
+	
+	\node (G2) at ($(V2) + (30:2.00cm)$) {};
+	\node (G3) at ($(V3) + (30:2.00cm)$) {};
+	\node (G4) at ($(V4) + (30:2.00cm)$) {};
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+	\begin{feynman}
+		
+		%Diagram
+		\diagram*{
+			
+			(V1)	-- [thick, fermion] (V2)
+					-- [thick, fermion] (V3) 
+					-- [thick, fermion] (V4) 
+					-- [thick, fermion] (V5),
+						
+			(G2) -- [thick, gluon] (V2),		
+			(G3) -- [thick, gluon] (V3),			
+			(G4) -- [thick, gluon] (V4)			
+			
+		};
+	
+	\end{feynman}
+\end{tikzpicture}

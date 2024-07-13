@@ -1,0 +1,39 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{partonshowers-quarkgluonsplitting-labelled} 
+%
+\begin{tikzpicture}
+	
+	
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	%		USE \node FOR LABELS, \coordinate FOR NO LABEL
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates: (angle:radius)
+	
+	\node (V1) at (180:2.50cm) {};
+	\node (V2) at (+30:2.50cm) {};
+	\node (V3) at (-30:2.50cm) {};
+	
+%	\node (CLabel) at ($(C)+(0cm,-0.50cm)$) {$s$};
+	\node (V1Label) at ($(V1)+(+0.20cm,+0.25cm)$) {$E$};
+	\node (V2Label) at ($(V2)+(+0.20cm,0.00cm)$) {$zE$};
+	\node (V3Label) at ($(V3)+(+0.60cm,+0.10cm)$) {$(1-z)E$};
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+	\begin{feynman}
+		
+		%Diagram
+		\diagram*{
+			
+			(V1)	-- [thick, fermion, momentum=$p$] (C)
+					-- [thick, fermion, momentum'=$q$] (V3),
+			
+			(V2) -- [thick, gluon, rmomentum'=$k$] (C),
+			
+		};
+		
+	\end{feynman}
+\end{tikzpicture}

@@ -1,0 +1,32 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{vertexquarkgluon-narrow} 
+%
+\begin{tikzpicture}
+	
+	
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	%		USE \node FOR LABELS, \coordinate FOR NO LABEL
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates: (angle:radius)
+	
+	\node (V1) at (180:3.50cm) {};
+	\node (V2) at (+20:3.50cm) {};
+	\node (V3) at (-20:3.50cm) {};
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+	\begin{feynman}
+		
+		%Diagram
+		\diagram*{
+			
+			(V1) -- [thick, fermion] (C) -- [thick, fermion] (V3),
+			
+			(V2) -- [thick, gluon] (C)			
+			
+		};
+		
+	\end{feynman}
+\end{tikzpicture}

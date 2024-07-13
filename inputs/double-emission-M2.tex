@@ -1,0 +1,47 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{double-emission-M2} 
+
+
+
+\begin{tikzpicture}\begin{feynman}
+		
+		% ---------------------
+		% Proper size --- Bounding box
+		\useasboundingbox (-2.0cm, -1.0cm) rectangle (6.0cm, 2.0cm);	
+		
+		% ---------------------
+		% Blob & Shower origin
+		
+		\coordinate (Start) at (0.00cm,0.00cm);
+		
+		\path (Start) +(1.00cm,0.00cm) coordinate (Split1);
+		\path (Split1) +(2.00cm,0.00cm) coordinate (Split2);
+		\path (Split2) +(2.00cm,0.00cm) coordinate (Quarkf);
+		
+		\path (Split1) +(35:2.00cm) coordinate (Gluon1);
+		\path (Split2) +(35:2.00cm) coordinate (Gluon2);
+		
+		\vertex[left=0.75cm of Start] (M2) {$\mathcal{M}_2 = $};
+		
+		\vertex[above=0cm of Start] (Qi) {$ P^{+}_{}\text{, } \boldsymbol{ P_{\perp}^{}} $};
+		\vertex[above=0cm of Gluon1] (G1) {$ p^{+}_{2}\text{, } \boldsymbol{ p_{2\perp}^{}} $};
+		\vertex[above=0cm of Gluon2] (G2) {$ p^{+}_{1}\text{, } \boldsymbol{ p_{1\perp}^{}} $};
+		\vertex[above=0cm of Quarkf] (Qf) {$ p^{+}_{f}\text{, } \boldsymbol{ p_{f\perp}^{}} $};
+		
+		\vertex[below=0.0cm of Split1] (S1) {$x^+_1$};
+		\vertex[below=0.0cm of Split2] (S2) {$x^+_2$};
+		% ---------------------	
+		\diagram*{
+			
+			(Start) -- [thick, fermion] (Split1)
+			-- [thick, fermion, momentum'=$ \boldsymbol{ q_{}^{}} $] (Split2)
+			-- [thick, fermion] (Quarkf),
+			
+			(Gluon1) -- [thick, gluon] (Split1),
+			(Gluon2) -- [thick, gluon] (Split2),
+			
+		};
+		
+		
+		
+\end{feynman}\end{tikzpicture}

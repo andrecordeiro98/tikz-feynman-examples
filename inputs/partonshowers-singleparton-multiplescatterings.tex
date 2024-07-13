@@ -1,0 +1,67 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{partonshowers-singleparton-multiplescatterings} 
+
+\begin{tikzpicture}
+
+\newlength{\QGPlength}\setlength{\QGPlength}{10.50cm}
+\newlength{\QGPheight}\setlength{\QGPheight}{4.00cm}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE TO SELF:
+% 	IN TEXSTUDIO, COMMENT MULTIPLE LINES AT ONCE WITH CTRL+T
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+	
+	% Proper size --- Bounding box
+	\useasboundingbox (0.00cm, 2.00cm) rectangle (10.50cm, -2.00cm);
+	
+	% ------------------------------------------------
+	% COMMENT THESE LINES TO SEE THE INDIVIDUAL STEPS
+	% ------------------------------------------------	
+	
+	% QGP Effect
+	\path[left color=orange!60,right color=orange!60] (1.75cm, 2.00cm) rectangle (10.50cm, -2.00cm);
+	
+	
+	% NOTE: MUST *NOT* INCLUDE A {} LABEL FOR THIS ONE
+	%		IF A LABEL IS PROVIDED, THERE WILL BE A WHITE CIRCLE OVER THE VERTEX 
+	%		USE \node FOR LABELS, \coordinate FOR NO LABEL
+	\coordinate (C) at (0,0); 
+	
+	% Having specified the origin, 
+	% the three endpoints are specified in polar coordinates: (angle:radius)
+	
+	\coordinate (S0) at (2.00cm,0.00cm) {};	
+	\coordinate (S1) at ($(S0)+(+25:1.50cm)$) {};
+	\coordinate (S2) at ($(S1)+(-30:2.50cm)$) {};
+	\coordinate (S3) at ($(S2)+(+30:2.50cm)$) {};
+	\coordinate (S4) at ($(S3)+(-20:2.50cm)$) {};
+
+	\coordinate (G0) at ($(S0)+(-90:1.00cm)$) {};
+	\coordinate (G1) at ($(S1)+(+90:1.00cm)$) {};
+	\coordinate (G2) at ($(S2)+(-90:1.00cm)$) {};
+	\coordinate (G3) at ($(S3)+(+90:1.00cm)$) {};
+
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+	\begin{feynman}
+		
+		%Diagram
+		\diagram*{
+			
+			(C) -- [thick, fermion] (S0)
+				-- [thick, fermion] (S1)
+				-- [thick, fermion] (S2)
+				-- [thick, fermion] (S3)
+				-- [thick, fermion] (S4),
+
+			(G0) -- [thick, gluon] (S0),				
+			(G1) -- [thick, gluon] (S1),
+			(G2) -- [thick, gluon] (S2),
+			(G3) -- [thick, gluon] (S3),
+
+			
+		};
+		
+	\end{feynman}
+\end{tikzpicture}

@@ -1,0 +1,33 @@
+% Set this figure's name when externalised 
+\tikzsetnextfilename{double-emission-M1} 
+
+\begin{tikzpicture}\begin{feynman}
+		
+		% ---------------------
+		% Blob & Shower origin
+		
+		\coordinate (Start) at (0.00cm,0.00cm);
+		
+		\path (Start) +(2.00cm,0.00cm) coordinate (Split1);
+		\path (Split1) +(2.00cm,0.00cm) coordinate (Split2);
+		\path (Split2) +(2.00cm,0.00cm) coordinate (Quarkf);
+
+		\vertex at (Split1) +(35:2.00cm) coordinate (Gluon1);
+		\vertex at (Split2) +(30:2.00cm) coordinate (Gluon2);
+		
+		
+		% ---------------------	
+		\diagram*{
+						
+			(Start) -- [thick, fermion] (Split1)
+					-- [thick, fermion] (Split2)
+					-- [thick, fermion] (Quarkf),
+						
+			(Gluon1) -- [thick, gluon] (Split1),
+			(Gluon2) -- [thick, gluon] (Split2),
+			
+		};
+		
+		
+		
+\end{feynman}\end{tikzpicture}

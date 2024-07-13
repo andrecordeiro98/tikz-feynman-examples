@@ -5,7 +5,7 @@
 
 % ------------------------------------------------
 % Blob Drawing
-\vertex[blob] (b) at (Blob) {}; 
+\vertex[blob, thick] (b) at (Blob) {}; 
 
 % ------------------------------------------------
 % Coordinates: Vacuum Shower 
@@ -48,30 +48,30 @@
 \diagram*{
 	
 	% Main branches and pair creation 	
-	(Origin) -- [photon] (PairCreation),
+	(Origin) -- [thick, photon] (PairCreation),
 	
-	(LowerFermion)	-- [fermion] (EndLowerBranch)
-	-- [fermion] (PairCreation) 
-	-- [fermion] (EndUpperBranch) 
-	-- [fermion] (UpperFermion),
+	(LowerFermion)	-- [thick, fermion] (EndLowerBranch)
+					-- [thick, fermion] (PairCreation) 
+					-- [thick, fermion] (EndUpperBranch) 
+					-- [thick, fermion] (UpperFermion),
 	
-	(UpperGluon) -- [gluon] (EndUpperBranch),
-	(LowerGluon) -- [gluon] (EndLowerBranch),
+	(UpperGluon) -- [thick, gluon] (EndUpperBranch),
+	(LowerGluon) -- [thick, gluon] (EndLowerBranch),
 	
 	% 'First Emission' branch
-	(Emission1) -- [gluon] (Gluon1) 
-	-- [gluon] {(Gluon1a), (Gluon1b)},
+	(Emission1) -- [thick, gluon] (Gluon1) 
+				-- [thick, gluon] {(Gluon1a), (Gluon1b)},
 	
-	(Fermion1b) -- [fermion] (Gluon1a)
-	-- [fermion] (Fermion1a),
+	(Fermion1b) -- [thick, fermion] (Gluon1a)
+				-- [thick, fermion] (Fermion1a),
 	
-	{(Gluon1c), (Gluon1d)} -- [gluon] (Gluon1b),
+	{(Gluon1c), (Gluon1d)} -- [thick, gluon] (Gluon1b),
 	
 	% 'Second Emission' branch
 	
-	(Emission2) -- [gluon] (Gluon2),
+	(Emission2) -- [thick, gluon] (Gluon2),
 	
-	(Fermion2a) -- [fermion] (Gluon2) 
-	-- [fermion] (Fermion2b),
+	(Fermion2a) -- [thick, fermion] (Gluon2) 
+				-- [thick, fermion] (Fermion2b),
 	
 };
